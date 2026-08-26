@@ -1,0 +1,137 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/container-queries";
+
+@theme {
+  --color-inverse-primary: #88d982;
+  --color-on-surface: #1b1c1c;
+  --color-on-secondary: #ffffff;
+  --color-on-error-container: #93000a;
+  --color-error-container: #ffdad6;
+  --color-surface-container-low: #f5f3f3;
+  --color-secondary: #126d27;
+  --color-on-background: #1b1c1c;
+  --color-surface-container-lowest: #ffffff;
+  --color-tertiary-fixed: #e4e4cc;
+  --color-secondary-container: #9cf49c;
+  --color-surface-bright: #fbf9f9;
+  --color-background: #fbf9f9;
+  --color-on-secondary-container: #19722b;
+  --color-surface-container: #efeded;
+  --color-on-primary: #ffffff;
+  --color-surface-variant: #e3e2e2;
+  --color-inverse-on-surface: #f2f0f0;
+  --color-primary-fixed-dim: #88d982;
+  --color-surface-dim: #dbdad9;
+  --color-outline-variant: #bfcaba;
+  --color-on-surface-variant: #40493d;
+  --color-inverse-surface: #303031;
+  --color-on-error: #ffffff;
+  --color-tertiary-fixed-dim: #c8c8b0;
+  --color-tertiary-container: #6e6f5b;
+  --color-on-primary-fixed-variant: #005312;
+  --color-surface-tint: #1b6d24;
+  --color-on-primary-fixed: #002204;
+  --color-outline: #707a6c;
+  --color-tertiary: #555744;
+  --color-on-tertiary-fixed: #1b1d0e;
+  --color-secondary-fixed: #9ff79f;
+  --color-on-tertiary-fixed-variant: #474836;
+  --color-on-secondary-fixed: #002105;
+  --color-primary-container: #2e7d32;
+  --color-on-secondary-fixed-variant: #005318;
+  --color-secondary-fixed-dim: #83da85;
+  --color-error: #ba1a1a;
+  --color-on-tertiary: #ffffff;
+  --color-surface: #fbf9f9;
+  --color-surface-container-highest: #e3e2e2;
+  --color-primary-fixed: #a3f69c;
+  --color-on-tertiary-container: #f3f3da;
+  --color-on-primary-container: #cbffc2;
+  --color-primary: #0d631b;
+  --color-surface-container-high: #e9e8e7;
+
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --spacing-lg: 24px;
+  --spacing-base: 8px;
+  --spacing-3xl: 64px;
+  --spacing-2xl: 48px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-xl: 32px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1280px;
+  --spacing-md: 16px;
+
+  --font-body-lg: 'Inter', sans-serif;
+  --font-label-sm: 'Inter', sans-serif;
+  --font-label-md: 'Inter', sans-serif;
+  --font-body-sm: 'Inter', sans-serif;
+  --font-body-md: 'Inter', sans-serif;
+  --font-display-lg-mobile: 'Inter', sans-serif;
+  --font-display-lg: 'Inter', sans-serif;
+  --font-headline-sm: 'Inter', sans-serif;
+  --font-headline-md: 'Inter', sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+@utility text-label-sm {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+@utility text-label-md {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+}
+@utility text-body-sm {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+@utility text-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+@utility text-display-lg-mobile {
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+@utility text-display-lg {
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-headline-sm {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+@utility text-headline-md {
+  font-size: 30px;
+  line-height: 38px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container;
+  }
+}
