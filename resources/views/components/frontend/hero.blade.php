@@ -20,11 +20,14 @@
                  }
              }
          }">
-    
     @if(count($slides) > 0)
         @foreach($slides as $index => $slide)
-            <div class="absolute inset-0 transition-opacity duration-1000 {{ $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}"
-                 :class="activeSlide === {{ $index }} ? 'opacity-100 z-10' : 'opacity-0 z-0'">
+            <div class="absolute inset-0 transition-opacity duration-1000"
+                 x-bind:class="{
+                     'opacity-100 z-10': activeSlide === {{ $index }},
+                     'opacity-0 z-0': activeSlide !== {{ $index }}
+                 }"
+                 @if($index > 0) style="opacity: 0; z-index: 0;" x-init="$el.removeAttribute('style')" @endif>
                 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ Storage::url($slide->image) }}')"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 
