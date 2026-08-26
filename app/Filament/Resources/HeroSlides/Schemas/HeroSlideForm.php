@@ -18,10 +18,6 @@ class HeroSlideForm
                     ->image()
                     ->maxSize(2048)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('16:9')
-                    ->imageResizeTargetWidth('1200')
-                    ->imageResizeTargetHeight('675')
                     ->required(),
                 TextInput::make('title')
                     ->label('Judul / Teks Utama')
