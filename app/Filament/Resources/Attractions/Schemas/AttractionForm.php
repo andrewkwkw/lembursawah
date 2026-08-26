@@ -23,13 +23,15 @@ class AttractionForm
                         'Air Terjun / Alam' => 'Air Terjun / Alam',
                         'Persawahan' => 'Persawahan',
                         'Warisan Budaya' => 'Warisan Budaya',
+                        'Restoran' => 'Restoran,'
                     ])
                     ->nullable(),
                 \Filament\Forms\Components\Select::make('difficulty')
                     ->label('Tingkat Kesulitan Akses')
                     ->options([
-                        'Jalan Santai (Mudah)' => 'Jalan Santai (Mudah)',
-                        'Mendaki (Sedang)' => 'Mendaki (Sedang)',
+                        'Akses Kendaraan' => 'Akses Kendaraan',
+                        'Jalan Santai' => 'Jalan Santai',
+                        'Mendaki' => 'Mendaki',
                     ])
                     ->nullable(),
                 RichEditor::make('description')
