@@ -9,7 +9,7 @@
                  if (this.totalSlides > 1) {
                      setInterval(() => {
                          this.activeSlide = (this.activeSlide + 1) % this.totalSlides;
-                     }, 1000); // 1000 = 1 detik
+                     }, 5000); // 5000 = 5 detik
                  }
              }
          }">

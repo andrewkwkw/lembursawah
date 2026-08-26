@@ -1,33 +1,22 @@
 <x-layouts.app title="Beranda - Lembur Sawah">
-    <section class="relative h-[819px] min-h-[600px] w-full flex items-center justify-center">
-        @php
-            $hero = isset($heroSlides) && $heroSlides->count() > 0 ? $heroSlides->first() : null;
-        @endphp
-        <div class="absolute inset-0 z-0">
-            @if($hero && $hero->image)
-                <img loading="lazy" class="w-full h-full object-cover" alt="Hero Image" src="{{ Storage::url($hero->image) }}"/>
-            @else
+    @if(isset($heroSlides) && count($heroSlides) > 0)
+        <x-frontend.hero :slides="$heroSlides" />
+    @else
+        <section class="relative h-[819px] min-h-[600px] w-full flex items-center justify-center">
+            <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 w-full h-full bg-primary/20"></div>
-            @endif
-            <div class="absolute inset-0 bg-black/30"></div>
-        </div>
-        <div class="relative z-10 text-center text-white px-4 md:px-8 w-full max-w-[1280px] mx-auto flex flex-col items-center justify-center">
-            <h1 class="font-display-lg text-display-lg text-white mb-6 shadow-sm">
-                {{ $hero ? $hero->title : 'Discover the Serenity of Nature' }}
-            </h1>
-            <p class="font-body-lg text-body-lg w-full max-w-[700px] mb-8 text-white/90">
-                @if($hero && $hero->subtitle)
-                    {!! strip_tags($hero->subtitle) !!}
-                @else
+                <div class="absolute inset-0 bg-black/30"></div>
+            </div>
+            <div class="relative z-10 text-center text-white px-4 md:px-8 w-full max-w-[1280px] mx-auto flex flex-col items-center justify-center">
+                <h1 class="font-display-lg text-display-lg text-white mb-6 shadow-sm">
+                    Discover the Serenity of Nature
+                </h1>
+                <p class="font-body-lg text-body-lg w-full max-w-[700px] mb-8 text-white/90">
                     Experience the tranquil beauty, rich culture, and sustainable tourism of Lembur Sawah. Your journey into the heart of natural heritage begins here.
-                @endif
-            </p>
-            <a href="{{ $hero && $hero->button_link ? url($hero->button_link) : url('/destinations') }}" class="bg-primary-container text-on-primary-container font-label-md text-label-md py-3 px-8 rounded-lg hover:bg-primary hover:text-on-primary transition-colors duration-300 shadow-md flex items-center gap-2">
-                {{ $hero && $hero->button_text ? $hero->button_text : 'Explore Now' }}
-                <span class="material-symbols-outlined">arrow_forward</span>
-            </a>
-        </div>
-    </section>
+                </p>
+            </div>
+        </section>
+    @endif
     <section class="py-3xl px-gutter max-w-container-max mx-auto">
         <div class="mb-2xl flex justify-between items-end">
             <div>
