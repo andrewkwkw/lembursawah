@@ -23,6 +23,7 @@
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 <body class="bg-background text-on-background font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
     <x-frontend.navbar />
@@ -43,5 +44,6 @@
             }
         }
     </script>
+    @livewireScripts
 </body>
 </html>
