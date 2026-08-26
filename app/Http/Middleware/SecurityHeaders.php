@@ -19,9 +19,9 @@ class SecurityHeaders
 
         if (method_exists($response, 'header')) {
             if (app()->environment('production')) {
-                $response->header('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src https://www.google.com; connect-src 'self';");
+                $response->header('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src https://www.google.com; connect-src 'self' https://lembursawah.com http://lembursawah.com https://*.lembursawah.com blob:;");
             } else {
-                $response->header('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: http://localhost:* ws://localhost:* http://127.0.0.1:* ws://127.0.0.1:* https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com data: https:; worker-src 'self' blob:;");
+                $response->header('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' blob: http://localhost:* ws://localhost:* http://127.0.0.1:* ws://127.0.0.1:* https://unpkg.com https://fonts.googleapis.com https://fonts.gstatic.com data: https:; worker-src 'self' blob:; connect-src 'self' http://localhost:* ws://localhost:* http://127.0.0.1:* ws://127.0.0.1:* blob:;");
             }
             
             $response->header('X-Content-Type-Options', 'nosniff');
