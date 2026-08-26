@@ -23,7 +23,7 @@ class AttractionForm
                         'Air Terjun / Alam' => 'Air Terjun / Alam',
                         'Persawahan' => 'Persawahan',
                         'Warisan Budaya' => 'Warisan Budaya',
-                        'Restoran' => 'Restoran,'
+                        'Restoran' => 'Restoran',
                     ])
                     ->nullable(),
                 \Filament\Forms\Components\Select::make('difficulty')
