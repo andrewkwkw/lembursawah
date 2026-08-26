@@ -14,10 +14,10 @@
                              this.activeSlide = (this.activeSlide + 1) % this.totalSlides;
                          }
                      }, 5000);
-                     
-                     // Bersihkan memori saat pengunjung pindah ke halaman lain
-                     this.$cleanup(() => clearInterval(this.intervalId));
                  }
+             },
+             destroy() {
+                 if (this.intervalId) clearInterval(this.intervalId);
              }
          }">
     @if(count($slides) > 0)
