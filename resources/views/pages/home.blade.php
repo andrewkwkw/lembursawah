@@ -40,7 +40,7 @@
             <div class="grid grid-cols-1 md:grid-cols-12 gap-lg h-auto md:h-[600px]">
                 @php $card1 = $topAttractions->get(0); @endphp
                 @if($card1)
-                <a href="{{ url('/destinations/' . $card1->id) }}" class="md:col-span-8 relative rounded-xl overflow-hidden group cursor-pointer h-[300px] md:h-full shadow-sm hover:shadow-md transition-shadow duration-300 block">
+                <a href="{{ url('/destinations/' . ($card1->slug ?? $card1->id)) }}" class="md:col-span-8 relative rounded-xl overflow-hidden group cursor-pointer h-[300px] md:h-full shadow-sm hover:shadow-md transition-shadow duration-300 block">
                     <img loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $card1->name }}" src="{{ Storage::url($card1->image) }}"/>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-lg w-full">
@@ -53,7 +53,7 @@
                 <div class="md:col-span-4 flex flex-col gap-lg h-[600px] md:h-full">
                     @php $card2 = $topAttractions->get(1); @endphp
                     @if($card2)
-                    <a href="{{ url('/destinations/' . $card2->id) }}" class="relative rounded-xl overflow-hidden group cursor-pointer flex-1 shadow-sm hover:shadow-md transition-shadow duration-300 block">
+                    <a href="{{ url('/destinations/' . ($card2->slug ?? $card2->id)) }}" class="relative rounded-xl overflow-hidden group cursor-pointer flex-1 shadow-sm hover:shadow-md transition-shadow duration-300 block">
                         <img loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $card2->name }}" src="{{ Storage::url($card2->image) }}"/>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-lg w-full">
@@ -64,7 +64,7 @@
                     @endif
                     @php $card3 = $topAttractions->get(2); @endphp
                     @if($card3)
-                    <a href="{{ url('/destinations/' . $card3->id) }}" class="relative rounded-xl overflow-hidden group cursor-pointer flex-1 shadow-sm hover:shadow-md transition-shadow duration-300 block">
+                    <a href="{{ url('/destinations/' . ($card3->slug ?? $card3->id)) }}" class="relative rounded-xl overflow-hidden group cursor-pointer flex-1 shadow-sm hover:shadow-md transition-shadow duration-300 block">
                         <img loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $card3->name }}" src="{{ Storage::url($card3->image) }}"/>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-lg w-full">
