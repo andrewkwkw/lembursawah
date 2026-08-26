@@ -55,6 +55,7 @@ jobs:
             cd ${{ secrets.SERVER_TARGET_PATH }}
             unzip -q -o deploy.zip
             rm deploy.zip
+            php artisan storage:link
             php artisan optimize
             php artisan view:cache
             php artisan filament:optimize
