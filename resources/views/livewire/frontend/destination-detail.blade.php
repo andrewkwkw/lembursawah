@@ -52,7 +52,7 @@
                     </ul>
 
                     @php
-                        $waNumber = \App\Models\Setting::where('key', 'whatsapp_number')->first()->value ?? '6281234567890';
+                        $waNumber = \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890';
                         $waMessage = urlencode("Halo admin Lembur Sawah, saya ingin menanyakan informasi tentang destinasi " . $destination->name);
                         $waLink = "https://wa.me/{$waNumber}?text={$waMessage}";
                     @endphp
