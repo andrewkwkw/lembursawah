@@ -36,12 +36,10 @@ class AgendaForm
                 FileUpload::make('image')
                     ->label('Gambar Agenda')
                     ->image()
-                    ->maxSize(2048)
+                    ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('16:9')
-                    ->imageResizeTargetWidth('1200')
-                    ->imageResizeTargetHeight('675'),
+                    ->directory('agendas')
+                    ->imageEditor(),
                 DateTimePicker::make('start_date')
                     ->label('Tanggal & Waktu Mulai')
                     ->required(),

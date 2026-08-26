@@ -16,8 +16,10 @@ class HeroSlideForm
                 FileUpload::make('image')
                     ->label('Gambar Utama')
                     ->image()
-                    ->maxSize(2048)
+                    ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->directory('hero-slides')
+                    ->imageEditor()
                     ->required(),
                 TextInput::make('title')
                     ->label('Judul / Teks Utama')

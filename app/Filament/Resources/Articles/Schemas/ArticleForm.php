@@ -40,12 +40,10 @@ class ArticleForm
                 FileUpload::make('image')
                     ->label('Gambar Utama')
                     ->image()
-                    ->maxSize(2048)
+                    ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('16:9')
-                    ->imageResizeTargetWidth('1200')
-                    ->imageResizeTargetHeight('675'),
+                    ->directory('articles')
+                    ->imageEditor(),
                 Toggle::make('is_published')
                     ->label('Terbitkan')
                     ->required(),

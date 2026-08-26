@@ -27,12 +27,10 @@ class TourPackageForm
                 FileUpload::make('image')
                     ->label('Gambar Paket')
                     ->image()
-                    ->maxSize(2048)
+                    ->maxSize(5120)
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('16:9')
-                    ->imageResizeTargetWidth('1200')
-                    ->imageResizeTargetHeight('675'),
+                    ->directory('tour-packages')
+                    ->imageEditor(),
                 TextInput::make('price')
                     ->label('Harga (Rupiah)')
                     ->required()
