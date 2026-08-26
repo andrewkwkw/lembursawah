@@ -5,18 +5,25 @@
          x-data="{ 
              activeSlide: 0, 
              totalSlides: {{ count($slides) }},
+             intervalId: null,
              init() {
                  if (this.totalSlides > 1) {
-                     setInterval(() => {
-                         this.activeSlide = (this.activeSlide + 1) % this.totalSlides;
-                     }, 5000); // 5000 = 5 detik
+                     this.intervalId = setInterval(() => {
+                         // Hanya ganti slide jika tab sedang aktif dilihat pengunjung
+                         if (document.visibilityState === 'visible') {
+                             this.activeSlide = (this.activeSlide + 1) % this.totalSlides;
+                         }
+                     }, 5000);
+                     
+                     // Bersihkan memori saat pengunjung pindah ke halaman lain
+                     this.$cleanup(() => clearInterval(this.intervalId));
                  }
              }
          }">
     
     @if(count($slides) > 0)
         @foreach($slides as $index => $slide)
-            <div class="absolute inset-0 transition-opacity duration-1000"
+            <div class="absolute inset-0 transition-opacity duration-1000 {{ $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}"
                  :class="activeSlide === {{ $index }} ? 'opacity-100 z-10' : 'opacity-0 z-0'">
                 <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ Storage::url($slide->image) }}')"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
