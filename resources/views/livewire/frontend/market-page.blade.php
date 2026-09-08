@@ -5,14 +5,14 @@
         <div class="flex flex-col lg:flex-row gap-8">
             <div class="w-full lg:w-1/4 flex flex-col gap-6">
                 <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm">
-                    <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Search</h3>
+                    <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Pencarian</h3>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-                        <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search products..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface transition-all">
+                        <input type="text" wire:model.live.debounce.300ms="search" placeholder="Cari produk UMKM..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface transition-all">
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm">
-                    <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Categories</h3>
+                    <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Kategori</h3>
                     <div class="flex flex-col gap-3">
                         @foreach($categoryCounts as $val => $count)
                         <label class="flex items-center gap-3 cursor-pointer group">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm">
-                    <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Price Range</h3>
+                    <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Rentang Harga</h3>
                     <div class="flex flex-col gap-3">
                         <label class="flex items-center gap-3 cursor-pointer group">
                             <input type="radio" name="price_range" wire:model.live="selectedPrice" value="" class="w-5 h-5 border-outline-variant text-primary focus:ring-primary">
@@ -68,7 +68,7 @@
                         <h2 class="font-display-md text-display-md font-bold mb-4">{{ $featuredProduct->name }}</h2>
                         <div class="font-body-lg text-body-lg text-white/90 mb-8 line-clamp-2">{!! strip_tags($featuredProduct->description) !!}</div>
                         <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $featuredProduct->wa_number) }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-label-lg font-semibold hover:bg-primary/90 transition-colors shadow-sm">
-                            Explore Collection <span class="material-symbols-outlined">arrow_forward</span>
+                            Pesan Produk <span class="material-symbols-outlined">arrow_forward</span>
                         </a>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                                 <div class="mt-auto">
                                     <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $product->wa_number) }}" target="_blank" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-primary text-primary rounded-lg font-label-md font-semibold hover:bg-primary/5 transition-colors">
                                         <span class="material-symbols-outlined text-[18px]">chat</span>
-                                        Order via WhatsApp
+                                        Pesan via WhatsApp
                                     </a>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
                             <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">inventory_2</span>
                             <h3 class="font-headline-sm text-on-surface mb-2">Belum ada produk</h3>
                             <p class="text-on-surface-variant text-center max-w-[448px]">Saat ini belum ada produk yang tersedia atau sesuai dengan filter Anda.</p>
-                            <button wire:click="$set('selectedCategories', []); $set('selectedPrice', ''); $set('search', '')" class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Clear Filters</button>
+                            <button wire:click="$set('selectedCategories', []); $set('selectedPrice', ''); $set('search', '')" class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Reset Filter</button>
                         </div>
                     @endforelse
                 </div>

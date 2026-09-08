@@ -5,23 +5,23 @@
         <!-- Header -->
         <div class="mb-12 max-w-[768px]">
             <h1 class="font-display-lg md:font-display-xl text-primary font-bold mb-4">
-                Visual Journey
+                Galeri Wisata
             </h1>
             <p class="font-body-lg text-on-surface-variant">
-                Explore the natural beauty, cultural heritage, and vibrant community life of Lembur Sawah through our curated high-resolution gallery.
+                Jelajahi keindahan alam, warisan budaya, dan kehidupan masyarakat Lembur Sawah melalui dokumentasi foto dan video.
             </p>
         </div>
 
         <!-- Filters -->
         <div class="flex flex-wrap items-center gap-3 mb-10">
             <button wire:click="setFilter('all')" class="px-6 py-2 rounded-full border {{ $filter === 'all' ? 'border-primary bg-primary text-on-primary font-bold' : 'border-outline-variant text-on-surface hover:bg-surface-variant' }} transition-colors font-label-md">
-                All
+                Semua
             </button>
             <button wire:click="setFilter('photos')" class="px-6 py-2 rounded-full border {{ $filter === 'photos' ? 'border-primary bg-primary text-on-primary font-bold' : 'border-outline-variant text-on-surface hover:bg-surface-variant' }} transition-colors font-label-md">
-                Photos
+                Foto
             </button>
             <button wire:click="setFilter('videos')" class="px-6 py-2 rounded-full border {{ $filter === 'videos' ? 'border-primary bg-primary text-on-primary font-bold' : 'border-outline-variant text-on-surface hover:bg-surface-variant' }} transition-colors font-label-md">
-                Videos
+                Video
             </button>
         </div>
 
@@ -76,9 +76,9 @@
             @empty
                 <div class="col-span-full py-16 flex flex-col items-center justify-center text-center bg-surface border border-dashed border-outline-variant/50 rounded-3xl">
                     <span class="material-symbols-outlined text-5xl text-on-surface-variant/50 mb-4">imagesmode</span>
-                    <h3 class="font-headline-sm font-bold text-on-surface mb-2">No Gallery Items Yet</h3>
+                    <h3 class="font-headline-sm font-bold text-on-surface mb-2">Belum Ada Dokumentasi Galeri</h3>
                     <p class="font-body-md text-on-surface-variant">
-                        Check back later for beautiful photos and videos of Lembur Sawah.
+                        Silakan kembali lagi nanti untuk melihat dokumentasi foto dan video Lembur Sawah.
                     </p>
                 </div>
             @endforelse
@@ -93,7 +93,7 @@
         <!-- Featured Videos Section -->
         @if($featuredVideos->count() > 0 && $filter !== 'photos')
             <div class="border-t border-outline-variant/30 pt-16 mb-8">
-                <h2 class="font-display-sm text-primary font-bold mb-8">Featured Videos</h2>
+                <h2 class="font-display-sm text-primary font-bold mb-8">Video Pilihan</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     @foreach($featuredVideos as $video)

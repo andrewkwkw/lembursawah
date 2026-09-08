@@ -2,7 +2,7 @@
     <div class="px-4 md:px-8 max-w-[1024px] mx-auto">
         <!-- Breadcrumb -->
         <nav class="flex mb-8 text-sm font-medium text-on-surface-variant">
-            <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Home</a>
+            <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Beranda</a>
             <span class="mx-2">/</span>
             <a href="{{ url('/packages') }}" class="hover:text-primary transition-colors">Paket Tour</a>
             <span class="mx-2">/</span>

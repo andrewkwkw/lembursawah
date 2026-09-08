@@ -80,6 +80,6 @@ class MarketPage extends Component
             'products' => $products,
             'featuredProduct' => $featuredProduct,
             'categoryCounts' => $categoryCounts,
-        ])->layout('components.layouts.app', ['title' => 'Market - Lembur Sawah']);
+        ])->layout('components.layouts.app', ['title' => 'Pasar Produk UMKM - Lembur Sawah']);
     }
 }

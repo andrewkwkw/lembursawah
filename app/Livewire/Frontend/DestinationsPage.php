@@ -59,6 +59,6 @@ class DestinationsPage extends Component
 
         return view('livewire.frontend.destinations-page', [
             'destinations' => $destinations,
-        ])->layout('components.layouts.app', ['title' => 'Explore Destinations - Lembur Sawah']);
+        ])->layout('components.layouts.app', ['title' => 'Destinasi Wisata - Lembur Sawah']);
     }
 }

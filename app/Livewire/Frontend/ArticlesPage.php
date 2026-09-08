@@ -68,6 +68,6 @@ class ArticlesPage extends Component
             'articles' => $articles,
             'featuredArticle' => $featuredArticle,
             'categories' => $categories,
-        ])->layout('components.layouts.app', ['title' => 'Articles - Lembur Sawah']);
+        ])->layout('components.layouts.app', ['title' => 'Artikel & Berita - Lembur Sawah']);
     }
 }

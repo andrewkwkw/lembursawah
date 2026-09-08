@@ -8,12 +8,12 @@
     <link rel="canonical" href="{{ url()->current() }}">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="{{ $title ?? 'Lembur Sawah - Tourism Village' }}">
+    <meta property="og:title" content="{{ $title ?? 'Lembur Sawah - Desa Wisata Alam & Budaya' }}">
     <meta property="og:description" content="{{ $metaDescription ?? 'Desa Wisata Alam dan Budaya di Jawa Barat.' }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     
-    <title>{{ $title ?? 'Lembur Sawah - Tourism Village' }}</title>
+    <title>{{ $title ?? 'Lembur Sawah - Desa Wisata Alam & Budaya' }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cinzel:wght@400..900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>

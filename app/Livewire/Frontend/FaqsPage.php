@@ -24,7 +24,7 @@ class FaqsPage extends Component
 
         if (RateLimiter::tooManyAttempts($key, 3)) {
             $seconds = RateLimiter::availableIn($key);
-            $this->addError('rate_limit', 'You have submitted too many questions. Please try again in ' . ceil($seconds / 60) . ' minutes.');
+            $this->addError('rate_limit', 'Anda telah mengirim terlalu banyak pertanyaan. Silakan coba lagi dalam ' . ceil($seconds / 60) . ' menit.');
             return;
         }
 
@@ -38,7 +38,7 @@ class FaqsPage extends Component
 
         $this->reset(['asked_by_name', 'question']);
         
-        session()->flash('success', 'Your question has been submitted successfully and is awaiting review.');
+        session()->flash('success', 'Pertanyaan Anda berhasil dikirim dan sedang menunggu peninjauan oleh tim desa.');
     }
 
     public function render()
@@ -47,6 +47,6 @@ class FaqsPage extends Component
 
         return view('livewire.frontend.faqs-page', [
             'faqs' => $faqs,
-        ])->layout('components.layouts.app', ['title' => 'FAQ - Lembur Sawah']);
+        ])->layout('components.layouts.app', ['title' => 'Tanya Jawab (FAQ) - Lembur Sawah']);
     }
 }

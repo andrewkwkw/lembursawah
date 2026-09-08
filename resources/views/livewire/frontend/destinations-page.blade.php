@@ -6,33 +6,37 @@
             <aside class="w-full lg:w-1/4 shrink-0">
                 <div
                     class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 sticky top-24 shadow-sm">
-                    <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-6">Filters</h2>
+                    <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-6">Filter</h2>
 
                     <!-- Categories -->
                     <div class="mb-8">
                         <h3
                             class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">
-                            Categories</h3>
+                            Kategori</h3>
                         <div class="flex flex-col gap-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="checkbox" wire:model.live="selectedCategories" value="Waterfalls"
+                                <input type="checkbox" wire:model.live="selectedCategories" value="Air Terjun / Alam"
                                     class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary">
                                 <span
-                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Waterfalls</span>
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Air Terjun / Alam</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="checkbox" wire:model.live="selectedCategories" value="Rice Fields"
+                                <input type="checkbox" wire:model.live="selectedCategories" value="Persawahan"
                                     class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary">
                                 <span
-                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Rice
-                                    Fields</span>
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Persawahan</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="checkbox" wire:model.live="selectedCategories" value="Cultural Heritage"
+                                <input type="checkbox" wire:model.live="selectedCategories" value="Warisan Budaya"
                                     class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary">
                                 <span
-                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Cultural
-                                    Heritage</span>
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Warisan Budaya</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" wire:model.live="selectedCategories" value="Restoran"
+                                    class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary">
+                                <span
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Restoran</span>
                             </label>
                         </div>
                     </div>
@@ -41,27 +45,31 @@
                     <div>
                         <h3
                             class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">
-                            Difficulty</h3>
+                            Tingkat Kesulitan</h3>
                         <div class="flex flex-col gap-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="radio" wire:model.live="selectedDifficulty" value="Any"
                                     class="w-5 h-5 border-outline-variant text-primary focus:ring-primary">
                                 <span
-                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Any</span>
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Semua</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" wire:model.live="selectedDifficulty" value="Easy Walk"
+                                <input type="radio" wire:model.live="selectedDifficulty" value="Akses Kendaraan"
                                     class="w-5 h-5 border-outline-variant text-primary focus:ring-primary">
                                 <span
-                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Easy
-                                    Walk</span>
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Akses Kendaraan</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" wire:model.live="selectedDifficulty" value="Moderate Hike"
+                                <input type="radio" wire:model.live="selectedDifficulty" value="Jalan Santai"
                                     class="w-5 h-5 border-outline-variant text-primary focus:ring-primary">
                                 <span
-                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Moderate
-                                    Hike</span>
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Jalan Santai</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="radio" wire:model.live="selectedDifficulty" value="Mendaki"
+                                    class="w-5 h-5 border-outline-variant text-primary focus:ring-primary">
+                                <span
+                                    class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Mendaki</span>
                             </label>
                         </div>
                     </div>
@@ -73,15 +81,13 @@
 
                 <!-- Header & Search -->
                 <div class="mb-8">
-                    <h1 class="font-display-md text-display-md font-bold text-on-surface mb-4">Explore Destinations</h1>
-                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[672px] mb-6">Discover the natural
-                        beauty and rich cultural heritage of Lembur Sawah. From cascading waterfalls to serene rice
-                        terraces.</p>
+                    <h1 class="font-display-md text-display-md font-bold text-on-surface mb-4">Jelajahi Destinasi</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[672px] mb-6">Temukan keindahan alam dan kekayaan warisan budaya Lembur Sawah. Dari gemercik air terjun hingga hamparan sawah yang asri.</p>
 
                     <div class="relative w-full max-w-[576px]">
                         <span
                             class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-                        <input type="text" wire:model.live="search" placeholder="Search attractions..."
+                        <input type="text" wire:model.live="search" placeholder="Cari destinasi wisata..."
                             class="w-full pl-12 pr-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary bg-surface outline-none transition-all font-body-md text-body-md placeholder:text-on-surface-variant/70">
                     </div>
                 </div>
@@ -162,8 +168,7 @@
 
                                     <div class="mt-auto pt-2">
                                         <a wire:navigate href="{{ $detailUrl }}"
-                                            class="block w-full py-2.5 text-center rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors font-label-md font-semibold">View
-                                            Details</a>
+                                            class="block w-full py-2.5 text-center rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors font-label-md font-semibold">Lihat Detail</a>
                                     </div>
                                 </div>
                             </div>
@@ -173,13 +178,11 @@
                         <div
                             class="md:col-span-3 py-12 flex flex-col items-center justify-center border-2 border-dashed border-outline-variant rounded-2xl">
                             <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">search_off</span>
-                            <h3 class="font-headline-sm text-on-surface mb-2">No destinations found</h3>
-                            <p class="text-on-surface-variant text-center max-w-[448px]">Try adjusting your filters or
-                                search query to find what you're looking for.</p>
+                            <h3 class="font-headline-sm text-on-surface mb-2">Tidak ada destinasi ditemukan</h3>
+                            <p class="text-on-surface-variant text-center max-w-[448px]">Coba sesuaikan filter atau kata kunci pencarian Anda.</p>
                             <button
                                 wire:click="$set('search', ''); $set('selectedCategories', []); $set('selectedDifficulty', 'Any')"
-                                class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Clear
-                                Filters</button>
+                                class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Reset Filter</button>
                         </div>
                     @endforelse
                 </div>

@@ -91,6 +91,6 @@ class AgendasPage extends Component
             'featuredEvent' => $featuredEvent,
             'calendar' => $calendar,
             'events' => $events,
-        ])->layout('components.layouts.app', ['title' => 'Agendas - Lembur Sawah']);
+        ])->layout('components.layouts.app', ['title' => 'Agenda Desa - Lembur Sawah']);
     }
 }

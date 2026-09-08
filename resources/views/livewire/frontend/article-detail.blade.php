@@ -2,7 +2,7 @@
     <div class="px-4 md:px-8 max-w-[800px] mx-auto">
         <!-- Breadcrumb -->
         <nav class="flex mb-8 text-sm font-medium text-on-surface-variant">
-            <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Home</a>
+            <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Beranda</a>
             <span class="mx-2">/</span>
             <a href="{{ url('/articles') }}" class="hover:text-primary transition-colors">Berita & Artikel</a>
             <span class="mx-2">/</span>
@@ -14,7 +14,7 @@
             <div class="flex items-center gap-4 text-on-surface-variant text-sm font-medium">
                 <div class="flex items-center gap-1">
                     <span class="material-symbols-outlined text-[18px]">calendar_today</span>
-                    {{ $article->created_at->format('d M Y') }}
+                    {{ $article->created_at->translatedFormat('d F Y') }}
                 </div>
                 <div class="flex items-center gap-1">
                     <span class="material-symbols-outlined text-[18px]">person</span>

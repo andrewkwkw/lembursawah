@@ -9,10 +9,10 @@
             </div>
             <div class="relative z-10 text-center text-white px-4 md:px-8 w-full max-w-[1280px] mx-auto flex flex-col items-center justify-center">
                 <h1 class="font-display-lg text-display-lg text-white mb-6 shadow-sm">
-                    Discover the Serenity of Nature
+                    Temukan Ketenangan dan Keasrian Alam
                 </h1>
                 <p class="font-body-lg text-body-lg w-full max-w-[700px] mb-8 text-white/90">
-                    Experience the tranquil beauty, rich culture, and sustainable tourism of Lembur Sawah. Your journey into the heart of natural heritage begins here.
+                    Rasakan keindahan yang tenang, kekayaan budaya, dan pariwisata berkelanjutan di Lembur Sawah. Perjalanan Anda menuju keasrian alam dan kearifan lokal dimulai di sini.
                 </p>
             </div>
         </section>
@@ -20,11 +20,11 @@
     <section class="py-3xl px-gutter max-w-container-max mx-auto">
         <div class="mb-2xl flex justify-between items-end">
             <div>
-                <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Top Destinations</h2>
-                <p class="font-body-md text-body-md text-on-surface-variant">Explore the most beloved spots in our village.</p>
+                <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Destinasi Unggulan</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Jelajahi spot wisata favorit di desa kami.</p>
             </div>
             <a class="font-label-md text-label-md text-primary hover:underline flex items-center gap-1 hidden md:flex" href="{{ url('/destinations') }}">
-                View all <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                Lihat semua <span class="material-symbols-outlined text-[18px]">chevron_right</span>
             </a>
         </div>
         
@@ -34,7 +34,7 @@
         
         @if($topAttractions->isEmpty())
             <div class="flex items-center justify-center h-[300px] border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low">
-                <p class="font-body-lg text-body-lg text-on-surface-variant italic">Belum ada top destinasi</p>
+                <p class="font-body-lg text-body-lg text-on-surface-variant italic">Belum ada destinasi unggulan</p>
             </div>
         @else
             <div class="grid grid-cols-1 md:grid-cols-12 gap-lg h-auto md:h-[600px]">
@@ -44,7 +44,7 @@
                     <img loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $card1->name }}" src="{{ Storage::url($card1->image) }}"/>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-lg w-full">
-                        <span class="inline-block bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full mb-2">Must Visit</span>
+                        <span class="inline-block bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2 py-1 rounded-full mb-2">Wajib Dikunjungi</span>
                         <h3 class="font-headline-sm text-headline-sm text-white mb-1">{{ $card1->name }}</h3>
                         <p class="font-body-sm text-body-sm text-white/80 line-clamp-2">{{ Str::limit(strip_tags($card1->description), 100) }}</p>
                     </div>

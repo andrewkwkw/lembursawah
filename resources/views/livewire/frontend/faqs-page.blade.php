@@ -29,7 +29,7 @@
                                     </div>
                                     @if($faq->asked_by_name)
                                         <div class="px-6 pb-4 pt-0">
-                                            <span class="inline-block bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-xs font-medium">Asked by {{ $faq->asked_by_name }}</span>
+                                            <span class="inline-block bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full text-xs font-medium">Ditanyakan oleh {{ $faq->asked_by_name }}</span>
                                         </div>
                                     @endif
                                 </div>
@@ -39,8 +39,8 @@
                 @else
                     <div class="text-center py-16 bg-white border border-outline-variant/30 rounded-2xl">
                         <span class="material-symbols-outlined text-5xl text-on-surface-variant/50 mb-4">quiz</span>
-                        <h3 class="font-headline-sm font-bold text-on-surface mb-2">No Questions Yet</h3>
-                        <p class="font-body-md text-on-surface-variant">Be the first to ask a question about Lembur Sawah!</p>
+                        <h3 class="font-headline-sm font-bold text-on-surface mb-2">Belum Ada Pertanyaan</h3>
+                        <p class="font-body-md text-on-surface-variant">Jadilah yang pertama mengajukan pertanyaan tentang Lembur Sawah!</p>
                     </div>
                 @endif
             </div>
@@ -48,8 +48,8 @@
             <!-- Ask a Question Form -->
             <div class="w-full lg:w-1/3">
                 <div class="bg-primary/5 rounded-3xl p-8 border border-primary/20 sticky top-24">
-                    <h3 class="font-headline-sm font-bold text-on-surface mb-2">Have a Question?</h3>
-                    <p class="font-body-sm text-on-surface-variant mb-6">Submit your question below and our team will answer it shortly.</p>
+                    <h3 class="font-headline-sm font-bold text-on-surface mb-2">Punya Pertanyaan?</h3>
+                    <p class="font-body-sm text-on-surface-variant mb-6">Kirimkan pertanyaan Anda di bawah ini dan tim pengelola kami akan segera menjawabnya.</p>
                     
                     @if (session()->has('success'))
                         <div class="bg-secondary-container text-on-secondary-container p-4 rounded-xl mb-6 flex gap-3 items-start">
@@ -67,20 +67,20 @@
 
                     <form wire:submit="submitQuestion" class="flex flex-col gap-5">
                         <div>
-                            <label for="asked_by_name" class="block font-label-md font-bold text-on-surface mb-2">Your Name</label>
-                            <input type="text" id="asked_by_name" wire:model="asked_by_name" class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface bg-white" placeholder="John Doe">
+                            <label for="asked_by_name" class="block font-label-md font-bold text-on-surface mb-2">Nama Lengkap</label>
+                            <input type="text" id="asked_by_name" wire:model="asked_by_name" class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface bg-white" placeholder="Nama Anda">
                             @error('asked_by_name') <span class="text-error text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
 
                         <div>
-                            <label for="question" class="block font-label-md font-bold text-on-surface mb-2">Question</label>
-                            <textarea id="question" wire:model="question" rows="4" class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface bg-white resize-none" placeholder="What time does the village open?"></textarea>
+                            <label for="question" class="block font-label-md font-bold text-on-surface mb-2">Pertanyaan Anda</label>
+                            <textarea id="question" wire:model="question" rows="4" class="w-full px-4 py-3 rounded-xl border border-outline-variant/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-on-surface bg-white resize-none" placeholder="Tuliskan pertanyaan Anda seputar Lembur Sawah di sini..."></textarea>
                             @error('question') <span class="text-error text-xs mt-1 block">{{ $message }}</span> @enderror
                         </div>
 
                         <button type="submit" class="w-full py-3 px-6 bg-primary text-on-primary font-label-lg font-bold rounded-full hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group">
-                            <span wire:loading.remove wire:target="submitQuestion">Submit Question</span>
-                            <span wire:loading wire:target="submitQuestion">Submitting...</span>
+                            <span wire:loading.remove wire:target="submitQuestion">Kirim Pertanyaan</span>
+                            <span wire:loading wire:target="submitQuestion">Mengirimkan...</span>
                             <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" wire:loading.remove wire:target="submitQuestion">send</span>
                         </button>
                     </form>

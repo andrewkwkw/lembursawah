@@ -17,7 +17,7 @@
                     </span>
                 @else
                     <span class="inline-block self-start px-3 py-1 bg-primary text-on-primary rounded-full font-label-sm font-bold tracking-wide uppercase mb-4 shadow-sm">
-                        Featured Event
+                        Agenda Unggulan
                     </span>
                 @endif
                 
@@ -32,7 +32,7 @@
                 <div class="flex flex-wrap items-center gap-6 mb-8 text-white/90">
                     <div class="flex items-center gap-2">
                         <span class="material-symbols-outlined text-xl">calendar_month</span>
-                        <span class="font-label-md">{{ $featuredEvent->start_date->format('F d, Y') }}</span>
+                        <span class="font-label-md">{{ $featuredEvent->start_date->translatedFormat('d F Y') }}</span>
                     </div>
                     @if($featuredEvent->location)
                     <div class="flex items-center gap-2">
@@ -44,17 +44,17 @@
 
                 @if($featuredEvent->registration_url)
                     <a href="{{ $featuredEvent->registration_url }}" target="_blank" class="self-start inline-flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-label-lg font-bold hover:bg-primary/90 transition-colors shadow-lg active:scale-95">
-                        Register Now
+                        Daftar Sekarang
                         <span class="material-symbols-outlined text-lg">arrow_forward</span>
                     </a>
                 @endif
             @else
                 <div class="w-full">
                     <h1 class="font-display-lg md:font-display-xl text-white font-bold mb-4">
-                        Upcoming Agendas
+                        Agenda Kegiatan Desa
                     </h1>
                     <p class="font-body-lg text-white/90 max-w-[768px] mb-6">
-                        Discover events and activities happening in our community.
+                        Temukan berbagai kegiatan dan acara menarik di desa kami.
                     </p>
                 </div>
             @endif
@@ -71,7 +71,7 @@
                     <!-- Calendar Header -->
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="font-headline-sm font-bold text-on-surface">
-                            {{ \Carbon\Carbon::create($currentYear, $currentMonth, 1)->format('F Y') }}
+                            {{ \Carbon\Carbon::create($currentYear, $currentMonth, 1)->translatedFormat('F Y') }}
                         </h2>
                         <div class="flex items-center gap-2">
                             <button wire:click="previousMonth" class="p-2 rounded-full hover:bg-surface-variant/30 text-on-surface-variant transition-colors flex items-center justify-center">
@@ -85,7 +85,7 @@
 
                     <!-- Days of Week -->
                     <div class="grid grid-cols-7 gap-1 mb-4 text-center">
-                        @foreach(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as $dayOfWeek)
+                        @foreach(['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'] as $dayOfWeek)
                             <div class="font-label-sm text-on-surface-variant font-medium">{{ $dayOfWeek }}</div>
                         @endforeach
                     </div>
@@ -120,7 +120,7 @@
                     @if($selectedDate)
                     <div class="mt-6 flex justify-center">
                         <button wire:click="$set('selectedDate', null)" class="text-sm text-primary font-medium hover:underline">
-                            Clear Filter
+                            Hapus Filter
                         </button>
                     </div>
                     @endif
@@ -131,10 +131,10 @@
             <div class="lg:col-span-2">
                 <div class="flex items-center justify-between mb-8">
                     <h2 class="font-headline-md font-bold text-on-surface">
-                        {{ $selectedDate ? 'Events on ' . \Carbon\Carbon::parse($selectedDate)->format('F d, Y') : 'Upcoming Events' }}
+                        {{ $selectedDate ? 'Agenda pada ' . \Carbon\Carbon::parse($selectedDate)->translatedFormat('d F Y') : 'Agenda Mendatang' }}
                     </h2>
                     @if(!$selectedDate)
-                        <span class="text-on-surface-variant font-label-md">Page {{ $events->currentPage() }}</span>
+                        <span class="text-on-surface-variant font-label-md">Halaman {{ $events->currentPage() }}</span>
                     @endif
                 </div>
 
@@ -144,70 +144,70 @@
                             
                             <!-- Date Box -->
                             <div class="bg-surface-container-low rounded-2xl p-4 min-w-[100px] flex flex-col items-center justify-center shrink-0 border border-outline-variant/20">
-                                <span class="font-label-md text-on-surface-variant uppercase tracking-wider mb-1">{{ $event->start_date->format('M') }}</span>
-                                <span class="font-display-md font-bold text-primary">{{ $event->start_date->format('d') }}</span>
+                                 <span class="font-label-md text-on-surface-variant uppercase tracking-wider mb-1">{{ $event->start_date->translatedFormat('M') }}</span>
+                                 <span class="font-display-md font-bold text-primary">{{ $event->start_date->format('d') }}</span>
                             </div>
 
                             <!-- Content -->
                             <div class="flex-1 w-full">
-                                <div class="flex flex-wrap items-center gap-3 mb-3">
-                                    @if($event->category)
-                                        <span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full font-label-sm font-bold uppercase tracking-wide">
-                                            {{ $event->category }}
-                                        </span>
-                                    @endif
-                                    
-                                    @if($event->status)
-                                        @php
-                                            // Simple logic for coloring status
-                                            $statusLower = strtolower($event->status);
-                                            $statusColor = 'text-primary';
-                                            if(str_contains($statusLower, 'fully') || str_contains($statusLower, 'closed') || str_contains($statusLower, 'sold')) {
-                                                $statusColor = 'text-error';
-                                            }
-                                        @endphp
-                                        <span class="font-label-sm font-semibold {{ $statusColor }} ml-auto md:ml-0 md:mr-auto">
-                                            {{ $event->status }}
-                                        </span>
-                                    @endif
-                                </div>
+                                 <div class="flex flex-wrap items-center gap-3 mb-3">
+                                     @if($event->category)
+                                         <span class="px-3 py-1 bg-tertiary-container text-on-tertiary-container rounded-full font-label-sm font-bold uppercase tracking-wide">
+                                             {{ $event->category }}
+                                         </span>
+                                     @endif
+                                     
+                                     @if($event->status)
+                                         @php
+                                             // Simple logic for coloring status
+                                             $statusLower = strtolower($event->status);
+                                             $statusColor = 'text-primary';
+                                             if(str_contains($statusLower, 'fully') || str_contains($statusLower, 'closed') || str_contains($statusLower, 'sold') || str_contains($statusLower, 'penuh') || str_contains($statusLower, 'tutup')) {
+                                                 $statusColor = 'text-error';
+                                             }
+                                         @endphp
+                                         <span class="font-label-sm font-semibold {{ $statusColor }} ml-auto md:ml-0 md:mr-auto">
+                                             {{ $event->status }}
+                                         </span>
+                                     @endif
+                                 </div>
 
-                                <h3 class="font-headline-sm font-bold text-on-surface mb-2">{{ $event->title }}</h3>
-                                
-                                <div class="font-body-md text-on-surface-variant line-clamp-2 mb-4">
-                                    {!! strip_tags($event->description) !!}
-                                </div>
+                                 <h3 class="font-headline-sm font-bold text-on-surface mb-2">{{ $event->title }}</h3>
+                                 
+                                 <div class="font-body-md text-on-surface-variant line-clamp-2 mb-4">
+                                     {!! strip_tags($event->description) !!}
+                                 </div>
 
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-auto">
-                                    <div class="flex flex-col gap-2">
-                                        <div class="flex items-center gap-2 text-on-surface-variant">
-                                            <span class="material-symbols-outlined text-sm">schedule</span>
-                                            <span class="font-label-sm">{{ $event->start_date->format('h:i A') }}</span>
-                                        </div>
-                                        @if($event->location)
-                                        <div class="flex items-center gap-2 text-on-surface-variant">
-                                            <span class="material-symbols-outlined text-sm">location_on</span>
-                                            <span class="font-label-sm">{{ $event->location }}</span>
-                                        </div>
-                                        @endif
-                                    </div>
-                                    
-                                    @if($event->registration_url)
-                                        <a href="{{ $event->registration_url }}" target="_blank" class="inline-flex items-center justify-center px-5 py-2 bg-primary text-on-primary rounded-xl font-label-md font-semibold hover:bg-primary/90 transition-colors active:scale-95 whitespace-nowrap">
-                                            Register
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="py-12 flex flex-col items-center justify-center text-center bg-surface border border-dashed border-outline-variant/50 rounded-3xl">
-                            <span class="material-symbols-outlined text-5xl text-on-surface-variant/50 mb-4">event_busy</span>
-                            <h3 class="font-headline-sm font-bold text-on-surface mb-2">No Events Found</h3>
-                            <p class="font-body-md text-on-surface-variant">
-                                {{ $selectedDate ? 'There are no events scheduled for this date.' : 'Check back later for upcoming events.' }}
-                            </p>
-                        </div>
+                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-auto">
+                                     <div class="flex flex-col gap-2">
+                                         <div class="flex items-center gap-2 text-on-surface-variant">
+                                             <span class="material-symbols-outlined text-sm">schedule</span>
+                                             <span class="font-label-sm">{{ $event->start_date->format('H:i') }} WIB</span>
+                                         </div>
+                                         @if($event->location)
+                                         <div class="flex items-center gap-2 text-on-surface-variant">
+                                             <span class="material-symbols-outlined text-sm">location_on</span>
+                                             <span class="font-label-sm">{{ $event->location }}</span>
+                                         </div>
+                                         @endif
+                                     </div>
+                                     
+                                     @if($event->registration_url)
+                                         <a href="{{ $event->registration_url }}" target="_blank" class="inline-flex items-center justify-center px-5 py-2 bg-primary text-on-primary rounded-xl font-label-md font-semibold hover:bg-primary/90 transition-colors active:scale-95 whitespace-nowrap">
+                                             Daftar
+                                         </a>
+                                     @endif
+                                 </div>
+                             </div>
+                         </div>
+                     @empty
+                         <div class="py-12 flex flex-col items-center justify-center text-center bg-surface border border-dashed border-outline-variant/50 rounded-3xl">
+                             <span class="material-symbols-outlined text-5xl text-on-surface-variant/50 mb-4">event_busy</span>
+                             <h3 class="font-headline-sm font-bold text-on-surface mb-2">Tidak Ada Agenda Ditemukan</h3>
+                             <p class="font-body-md text-on-surface-variant">
+                                 {{ $selectedDate ? 'Tidak ada agenda yang dijadwalkan pada tanggal ini.' : 'Silakan periksa kembali nanti untuk agenda mendatang.' }}
+                             </p>
+                         </div>
                     @endforelse
 
                     @if($events->hasPages() && !$selectedDate)

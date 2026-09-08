@@ -63,7 +63,7 @@
     @else
         <div class="absolute inset-0 z-0">
             <div class="w-full h-full bg-surface-variant flex items-center justify-center">
-                <span class="text-on-surface-variant">No Hero Image Available</span>
+                <span class="text-on-surface-variant">Gambar Banner Belum Tersedia</span>
             </div>
         </div>
     @endif

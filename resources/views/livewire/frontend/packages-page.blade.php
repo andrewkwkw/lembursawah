@@ -5,34 +5,34 @@
             <!-- Sidebar / Filters -->
             <aside class="w-full lg:w-1/4 shrink-0">
                 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 sticky top-24 shadow-sm">
-                    <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-6">Filters</h2>
+                    <h2 class="font-headline-sm text-headline-sm font-bold text-on-surface mb-6">Filter</h2>
                     
                     <!-- Duration -->
                     <div class="mb-8">
-                        <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Duration</h3>
+                        <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Durasi</h3>
                         <div class="flex flex-col gap-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="radio" wire:model.live="selectedDuration" value="" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
                                 <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Semua Durasi</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" wire:model.live="selectedDuration" value="Half Day" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
-                                <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Half Day</span>
+                                <input type="radio" wire:model.live="selectedDuration" value="half_day" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
+                                <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Setengah Hari</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" wire:model.live="selectedDuration" value="Full Day" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
-                                <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Full Day</span>
+                                <input type="radio" wire:model.live="selectedDuration" value="full_day" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
+                                <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Seharian Penuh (1 Hari)</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group">
-                                <input type="radio" wire:model.live="selectedDuration" value="2 Days 1 Night" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
-                                <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">2 Days 1 Night</span>
+                                <input type="radio" wire:model.live="selectedDuration" value="multiday" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
+                                <span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Menginap (2+ Hari)</span>
                             </label>
                         </div>
                     </div>
 
                     <!-- Price Range -->
                     <div>
-                        <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Price Range</h3>
+                        <h3 class="font-label-md text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-4">Rentang Harga</h3>
                         <div class="flex flex-col gap-3">
                             <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="radio" wire:model.live="selectedPrice" value="" class="w-5 h-5 rounded-full border-outline-variant text-primary focus:ring-primary">
@@ -78,7 +78,7 @@
                                     @if($package->is_popular)
                                         <div class="absolute top-4 left-4 z-10 bg-primary text-on-primary px-3 py-1 rounded-full font-label-sm font-semibold flex items-center gap-1 shadow-md">
                                             <span class="material-symbols-outlined text-[16px]">star</span>
-                                            Most Popular
+                                            Paling Populer
                                         </div>
                                     @endif
                                     
@@ -112,7 +112,7 @@
                                             <div class="text-on-surface-variant font-label-sm mb-1">Mulai dari</div>
                                             <div class="font-headline-md text-headline-md font-bold text-primary">Rp{{ number_format($package->price, 0, ',', '.') }}<span class="font-body-sm text-on-surface-variant font-normal"> /orang</span></div>
                                         </div>
-                                        <a href="{{ $package->link_url ?? url('/packages/'.$package->slug) }}" class="px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md font-semibold hover:bg-primary/90 transition-colors shadow-sm">Book Now</a>
+                                        <a href="{{ $package->link_url ?? url('/packages/'.$package->slug) }}" class="px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md font-semibold hover:bg-primary/90 transition-colors shadow-sm">Pesan Sekarang</a>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                     
                                     <div class="flex items-center justify-between mt-auto">
                                         <div class="font-headline-sm text-headline-sm font-bold text-primary">Rp{{ number_format($package->price, 0, ',', '.') }}</div>
-                                        <a href="{{ $package->link_url ?? url('/packages/'.$package->slug) }}" class="px-5 py-2 border border-primary text-primary rounded-lg font-label-sm font-semibold hover:bg-primary/5 transition-colors">Details</a>
+                                        <a href="{{ $package->link_url ?? url('/packages/'.$package->slug) }}" class="px-5 py-2 border border-primary text-primary rounded-lg font-label-sm font-semibold hover:bg-primary/5 transition-colors">Detail Paket</a>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                             <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">search_off</span>
                             <h3 class="font-headline-sm text-on-surface mb-2">Belum ada paket wisata</h3>
                             <p class="text-on-surface-variant text-center max-w-[448px]">Saat ini belum ada paket wisata yang tersedia atau sesuai dengan filter Anda.</p>
-                            <button wire:click="$set('selectedDuration', ''); $set('selectedPrice', '')" class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Clear Filters</button>
+                            <button wire:click="$set('selectedDuration', ''); $set('selectedPrice', '')" class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Reset Filter</button>
                         </div>
                     @endforelse
                 </div>

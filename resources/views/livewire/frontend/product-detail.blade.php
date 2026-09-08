@@ -2,9 +2,9 @@
     <div class="px-4 md:px-8 max-w-[1024px] mx-auto">
         <!-- Breadcrumb -->
         <nav class="flex mb-8 text-sm font-medium text-on-surface-variant">
-            <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Home</a>
+            <a href="{{ url('/') }}" class="hover:text-primary transition-colors">Beranda</a>
             <span class="mx-2">/</span>
-            <a href="{{ url('/market') }}" class="hover:text-primary transition-colors">Market</a>
+            <a href="{{ url('/market') }}" class="hover:text-primary transition-colors">Produk</a>
             <span class="mx-2">/</span>
             <span class="text-on-surface">{{ $product->name }}</span>
         </nav>

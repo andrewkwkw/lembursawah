@@ -33,8 +33,29 @@ class PackagesPage extends Component
         $query = TourPackage::query();
 
         if (!empty($this->selectedDuration)) {
-            $duration = str_replace(['%', '_'], ['\%', '\_'], $this->selectedDuration);
-            $query->where('duration', 'like', '%' . $duration . '%');
+            if ($this->selectedDuration === 'half_day') {
+                $query->where(function($q) {
+                    $q->where('duration', 'like', '%half%')
+                      ->orWhere('duration', 'like', '%setengah%')
+                      ->orWhere('duration', 'like', '%jam%');
+                });
+            } elseif ($this->selectedDuration === 'full_day') {
+                $query->where(function($q) {
+                    $q->where('duration', 'like', '%full%')
+                      ->orWhere('duration', 'like', '%1 hari%')
+                      ->orWhere('duration', 'like', '%seharian%');
+                });
+            } elseif ($this->selectedDuration === 'multiday') {
+                $query->where(function($q) {
+                    $q->where('duration', 'like', '%malam%')
+                      ->orWhere('duration', 'like', '%night%')
+                      ->orWhere('duration', 'like', '%2 hari%')
+                      ->orWhere('duration', 'like', '%3 hari%');
+                });
+            } else {
+                $duration = str_replace(['%', '_'], ['\%', '\_'], $this->selectedDuration);
+                $query->where('duration', 'like', '%' . $duration . '%');
+            }
         }
 
         if (!empty($this->selectedPrice)) {
@@ -55,6 +76,6 @@ class PackagesPage extends Component
 
         return view('livewire.frontend.packages-page', [
             'packages' => $packages,
-        ])->layout('components.layouts.app', ['title' => 'Tour Packages - Lembur Sawah']);
+        ])->layout('components.layouts.app', ['title' => 'Paket Tour Wisata - Lembur Sawah']);
     }
 }

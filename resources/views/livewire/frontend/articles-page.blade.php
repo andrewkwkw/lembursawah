@@ -14,25 +14,24 @@
                 <span
                     class="font-label-md text-primary-container font-bold uppercase tracking-[0.2em] mb-4">{{ $featuredArticle->category }}</span>
             @else
-                <span class="font-label-md text-primary-container font-bold uppercase tracking-[0.2em] mb-4">Lembur Sawah
-                    Journal</span>
+                <span class="font-label-md text-primary-container font-bold uppercase tracking-[0.2em] mb-4">Warta Lembur Sawah</span>
             @endif
 
             <h1 class="font-display-lg md:font-display-xl text-white font-bold mb-6">
-                {{ $featuredArticle ? $featuredArticle->title : 'Village Stories' }}
+                {{ $featuredArticle ? $featuredArticle->title : 'Kabar & Cerita Desa' }}
             </h1>
 
             <div class="font-body-lg text-white/90 max-w-[672px] mx-auto mb-10 line-clamp-2">
                 @if($featuredArticle)
                     {!! strip_tags($featuredArticle->content) !!}
                 @else
-                    Discover the latest news, cultural heritage, and heartwarming stories from our community.
+                    Temukan berita terbaru, warisan budaya, dan kisah menarik seputar desa kami.
                 @endif
             </div>
 
             <div class="relative w-full max-w-[672px] mx-auto">
                 <input type="text" wire:model.live.debounce.300ms="search"
-                    placeholder="Search village stories, news, or culture..."
+                    placeholder="Cari artikel, berita, atau cerita budaya desa..."
                     class="w-full px-8 py-4 md:py-5 bg-white/95 backdrop-blur-sm border-2 border-transparent focus:border-primary rounded-full shadow-lg font-body-lg text-on-surface placeholder:text-on-surface-variant/60 outline-none transition-all focus:ring-4 focus:ring-primary/20 text-center">
             </div>
         </div>
@@ -43,7 +42,7 @@
         <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
             <button wire:click="$set('selectedCategory', '')"
                 class="px-5 py-2 rounded-full font-label-md font-semibold transition-colors {{ empty($selectedCategory) ? 'bg-primary text-on-primary shadow-md' : 'bg-surface-variant/50 text-on-surface-variant hover:bg-surface-variant' }}">
-                All
+                Semua
             </button>
             @foreach($categories as $cat)
                 <button wire:click="$set('selectedCategory', '{{ $cat }}')"
@@ -60,7 +59,7 @@
         </div>
 
         <div>
-            <h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-6">Latest Stories</h3>
+            <h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface mb-6">Artikel Terbaru</h3>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($articles as $article)
@@ -105,12 +104,10 @@
                     <div
                         class="col-span-full py-16 flex flex-col items-center justify-center text-center bg-surface-variant/20 rounded-3xl">
                         <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-4">article</span>
-                        <h3 class="font-headline-sm text-on-surface mb-2">No articles found</h3>
-                        <p class="text-on-surface-variant text-center max-w-[448px]">We couldn't find any articles matching
-                            your search or filter.</p>
+                        <h3 class="font-headline-sm text-on-surface mb-2">Belum Ada Artikel Ditemukan</h3>
+                        <p class="text-on-surface-variant text-center max-w-[448px]">Kami tidak menemukan artikel yang sesuai dengan pencarian atau filter Anda.</p>
                         <button wire:click="$set('search', ''); $set('selectedCategory', '')"
-                            class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Clear
-                            Filters</button>
+                            class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90">Reset Filter</button>
                     </div>
                 @endforelse
             </div>
