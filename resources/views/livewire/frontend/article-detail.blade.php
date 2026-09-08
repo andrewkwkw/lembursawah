@@ -34,7 +34,7 @@
                 margin-top: 0 !important;
                 margin-bottom: 1rem !important;
                 line-height: 1.75 !important;
-                text-align: justify !important;
+                text-align: justify;
                 text-justify: inter-word;
             }
             .prose-article p:last-child {
@@ -48,13 +48,25 @@
                 margin-bottom: 1.5rem !important;
                 border-radius: 0.75rem !important;
             }
-            .prose-article figure {
+            .prose-article figure,
+            .prose-article figcaption,
+            .prose-article p[style*="center"],
+            .prose-article p[align="center"],
+            .prose-article p:has(img),
+            .prose-article p:has(img) + p,
+            .prose-article p:has(> em:only-child) {
                 text-align: center !important;
             }
             .prose-article em {
-                display: inline-block;
                 color: #525a4e;
                 font-size: 0.925rem;
+            }
+            .prose-article p[style*="center"] em,
+            .prose-article p:has(img) + p em,
+            .prose-article p:has(> em:only-child) em,
+            .prose-article figcaption em {
+                display: block !important;
+                text-align: center !important;
                 margin-top: -0.5rem;
                 margin-bottom: 1.25rem;
             }
@@ -70,7 +82,7 @@
             .prose-article li {
                 margin-bottom: 0.5rem !important;
                 line-height: 1.75 !important;
-                text-align: justify !important;
+                text-align: justify;
             }
             .prose-article blockquote {
                 border-left: 4px solid var(--color-primary, #0d631b) !important;
@@ -83,6 +95,32 @@
         <div class="prose prose-lg text-justify text-on-surface-variant max-w-none prose-headings:text-on-surface prose-a:text-primary prose-img:rounded-xl prose-article">
             {!! \Stevebauman\Purify\Facades\Purify::clean($article->content) !!}
         </div>
+
+        <script>
+            function centerArticleCaptions() {
+                document.querySelectorAll('.prose-article img').forEach(function(img) {
+                    var parentP = img.closest('p');
+                    if (parentP) {
+                        parentP.style.setProperty('text-align', 'center', 'important');
+                        var nextP = parentP.nextElementSibling;
+                        if (nextP && (nextP.querySelector('em') || nextP.textContent.trim().length < 120)) {
+                            nextP.style.setProperty('text-align', 'center', 'important');
+                            var em = nextP.querySelector('em');
+                            if (em) {
+                                em.style.setProperty('display', 'block', 'important');
+                                em.style.setProperty('text-align', 'center', 'important');
+                            }
+                        }
+                    }
+                });
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', centerArticleCaptions);
+            } else {
+                centerArticleCaptions();
+            }
+            document.addEventListener('livewire:navigated', centerArticleCaptions);
+        </script>
         
         <div class="mt-16 pt-8 border-t border-outline-variant/30 flex justify-between items-center">
             <a href="{{ url('/articles') }}" class="flex items-center gap-2 text-primary hover:underline font-medium">
