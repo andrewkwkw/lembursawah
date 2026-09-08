@@ -5,15 +5,18 @@
 
     RewriteEngine On
 
-    # 1. Force HTTPS
+    # 1. Paksa HTTPS otomatis
     RewriteCond %{HTTPS} !=on
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 2. Block dotfiles except .well-known
-    RewriteRule ^\.(?!well-known).* - [F,L]
+    # 2. Blokir akses ke file tersembunyi (dotfiles) kecuali .well-known (untuk SSL)
+    RewriteRule (^|/)\.(?!well-known) - [F,L]
 
-    # 3. Block sensitive files and project configs
-    <FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op]|sqlite|sqlite3|db|env.*|json|lock|md|yml|yaml|xml)|(composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml))$">
+    # 3. Blokir akses langsung ke folder-folder internal Laravel jika dipanggil
+    RewriteRule (^|/)(app|bootstrap|config|database|resources|routes|storage/framework|storage/logs|tests|vendor)(/|$) - [F,L]
+
+    # 4. Blokir akses ke file sensitif dan file proyek (composer, package, artisan, vite, dll)
+    <FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op]|sqlite|sqlite3|db|env.*|json|lock|md|yml|yaml|xml)|(composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml|vite\.config\.(js|ts)))$">
         Require all denied
     </FilesMatch>
 
@@ -34,4 +37,15 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+
+# HTTP Security Headers & Sembunyikan Versi PHP
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
 </IfModule>
