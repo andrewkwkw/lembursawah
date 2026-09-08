@@ -31,8 +31,11 @@
 
         <style>
             .prose-article p {
-                margin-bottom: 1.5rem !important;
-                line-height: 1.85 !important;
+                margin-top: 0 !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.75 !important;
+                text-align: justify !important;
+                text-justify: inter-word;
             }
             .prose-article p:last-child {
                 margin-bottom: 0 !important;
@@ -67,6 +70,7 @@
             .prose-article li {
                 margin-bottom: 0.5rem !important;
                 line-height: 1.75 !important;
+                text-align: justify !important;
             }
             .prose-article blockquote {
                 border-left: 4px solid var(--color-primary, #0d631b) !important;
@@ -76,7 +80,7 @@
                 color: #525a4e !important;
             }
         </style>
-        <div class="prose prose-lg text-on-surface-variant max-w-none prose-headings:text-on-surface prose-a:text-primary prose-img:rounded-xl prose-article">
+        <div class="prose prose-lg text-justify text-on-surface-variant max-w-none prose-headings:text-on-surface prose-a:text-primary prose-img:rounded-xl prose-article">
             {!! \Stevebauman\Purify\Facades\Purify::clean($article->content) !!}
         </div>
         
@@ -85,8 +89,6 @@
                 <span class="material-symbols-outlined">arrow_back</span>
                 Kembali ke Daftar Artikel
             </a>
-            
-            <!-- Share buttons could go here -->
         </div>
     </div>
 </div>

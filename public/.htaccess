@@ -5,6 +5,18 @@
 
     RewriteEngine On
 
+    # 1. Force HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # 2. Block dotfiles except .well-known
+    RewriteRule ^\.(?!well-known).* - [F,L]
+
+    # 3. Block sensitive files and project configs
+    <FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op]|sqlite|sqlite3|db|env.*|json|lock|md|yml|yaml|xml)|(composer\.(json|lock)|package(-lock)?\.json|artisan|phpunit\.xml))$">
+        Require all denied
+    </FilesMatch>
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
