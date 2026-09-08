@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/forms";
 @plugin "@tailwindcss/container-queries";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-inverse-primary: #88d982;
@@ -134,4 +135,51 @@
   body {
     @apply font-sans antialiased bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container;
   }
+}
+
+/* Global Rich-Text / Prose Typography Styles */
+.prose p {
+  margin-bottom: 1.5rem !important;
+  line-height: 1.85 !important;
+}
+
+.prose p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  font-weight: 700 !important;
+}
+
+.prose ul {
+  list-style-type: disc !important;
+  margin-bottom: 1.5rem !important;
+  padding-left: 1.5rem !important;
+}
+
+.prose ol {
+  list-style-type: decimal !important;
+  margin-bottom: 1.5rem !important;
+  padding-left: 1.5rem !important;
+}
+
+.prose li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.75 !important;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-primary, #0d631b) !important;
+  padding-left: 1rem !important;
+  margin: 1.5rem 0 !important;
+  font-style: italic !important;
+  color: var(--color-on-surface-variant, #40493d) !important;
+}
+
+.prose img {
+  border-radius: 0.75rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
 }
