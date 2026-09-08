@@ -19,8 +19,8 @@
             @foreach($mapPoints as $index => $point)
                 <div class="bg-white border border-outline-variant/30 rounded-xl p-4 cursor-pointer hover:border-primary-container hover:shadow-md transition-all duration-300 group" onclick="focusMarker({{ $index }})">
                     <h3 class="font-headline-sm text-lg font-bold text-primary-container mb-1 group-hover:text-primary transition-colors">{{ $point->name }}</h3>
-                    <div class="font-body-sm text-on-surface-variant line-clamp-2 prose prose-sm">
-                        {!! $point->description !!}
+                    <div class="font-body-sm text-on-surface-variant line-clamp-2">
+                        {{ strip_tags($point->description) }}
                     </div>
                     <div class="mt-3 flex items-center gap-1 text-primary-container/70 text-xs font-semibold">
                         <span class="material-symbols-outlined text-[16px]">map</span>
