@@ -85,77 +85,94 @@
         let leafletMap = null;
         let globalMapPoints = @json($mapPoints);
 
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('mapModal', () => ({
-                isOpen: false,
-                point: null,
-                safeDescription: '',
-                init() {
-                    window.addEventListener('open-map-modal', (e) => this.openModal(e.detail));
-                },
-                sanitizeHtml(html) {
-                    if (!html) return '';
-                    const allowed = ['P','BR','STRONG','EM','UL','OL','LI','H1','H2','H3','H4','H5','H6','A','SPAN','DIV'];
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const walk = (node) => {
-                        for (const child of Array.from(node.childNodes)) {
-                            if (child.nodeType === 1) {
-                                if (!allowed.includes(child.tagName)) {
-                                    child.replaceWith(document.createTextNode(child.textContent));
-                                } else {
-                                    for (const attr of Array.from(child.attributes)) {
-                                        if (attr.name.startsWith('on')) child.removeAttribute(attr.name);
+        function registerMapModal() {
+            if (window.Alpine) {
+                Alpine.data('mapModal', () => ({
+                    isOpen: false,
+                    point: null,
+                    safeDescription: '',
+                    init() {
+                        window.addEventListener('open-map-modal', (e) => this.openModal(e.detail));
+                    },
+                    sanitizeHtml(html) {
+                        if (!html) return '';
+                        const allowed = ['P','BR','STRONG','EM','UL','OL','LI','H1','H2','H3','H4','H5','H6','A','SPAN','DIV'];
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const walk = (node) => {
+                            for (const child of Array.from(node.childNodes)) {
+                                if (child.nodeType === 1) {
+                                    if (!allowed.includes(child.tagName)) {
+                                        child.replaceWith(document.createTextNode(child.textContent));
+                                    } else {
+                                        for (const attr of Array.from(child.attributes)) {
+                                            if (attr.name.startsWith('on')) child.removeAttribute(attr.name);
+                                        }
+                                        if (child.tagName === 'A') {
+                                            child.setAttribute('rel', 'noopener noreferrer');
+                                            child.setAttribute('target', '_blank');
+                                        }
+                                        walk(child);
                                     }
-                                    if (child.tagName === 'A') {
-                                        child.setAttribute('rel', 'noopener noreferrer');
-                                        child.setAttribute('target', '_blank');
-                                    }
-                                    walk(child);
                                 }
                             }
-                        }
-                    };
-                    walk(doc.body);
-                    return doc.body.innerHTML;
-                },
-                openModal(pointData) {
-                    this.point = pointData;
-                    this.safeDescription = this.sanitizeHtml(pointData?.description || '');
-                    this.isOpen = true;
-                    document.body.style.overflow = 'hidden';
-                    
-                    if(this.point.street_view_embed_url) {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(this.point.street_view_embed_url, 'text/html');
-                        const iframe = doc.querySelector('iframe');
-                        if(iframe && iframe.src && (iframe.src.includes('google.com/maps') || iframe.src.includes('google.com/maps'))) {
-                            const safeIframe = document.createElement('iframe');
-                            safeIframe.src = iframe.src;
-                            safeIframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;top:0;left:0;';
-                            safeIframe.setAttribute('allowfullscreen', '');
-                            safeIframe.setAttribute('loading', 'lazy');
-                            safeIframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-                            this.$refs.streetViewContainer.innerHTML = '';
-                            this.$refs.streetViewContainer.appendChild(safeIframe);
+                        };
+                        walk(doc.body);
+                        return doc.body.innerHTML;
+                    },
+                    openModal(pointData) {
+                        this.point = pointData;
+                        this.safeDescription = this.sanitizeHtml(pointData?.description || '');
+                        this.isOpen = true;
+                        document.body.style.overflow = 'hidden';
+                        
+                        if(this.point.street_view_embed_url) {
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(this.point.street_view_embed_url, 'text/html');
+                            const iframe = doc.querySelector('iframe');
+                            if(iframe && iframe.src && iframe.src.includes('google.com/maps')) {
+                                const safeIframe = document.createElement('iframe');
+                                safeIframe.src = iframe.src;
+                                safeIframe.style.cssText = 'width:100%;height:100%;border:none;position:absolute;top:0;left:0;';
+                                safeIframe.setAttribute('allowfullscreen', '');
+                                safeIframe.setAttribute('loading', 'lazy');
+                                safeIframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+                                this.$refs.streetViewContainer.innerHTML = '';
+                                this.$refs.streetViewContainer.appendChild(safeIframe);
+                            } else {
+                                this.$refs.streetViewContainer.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-surface-variant/50"><span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-2">location_off</span><span class="text-on-surface-variant/50 font-body-md">URL embed tidak valid</span></div>';
+                            }
                         } else {
-                            this.$refs.streetViewContainer.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-surface-variant/50"><span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-2">location_off</span><span class="text-on-surface-variant/50 font-body-md">URL embed tidak valid</span></div>';
+                            this.$refs.streetViewContainer.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-surface-variant/50"><span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-2">location_off</span><span class="text-on-surface-variant/50 font-body-md">Tidak ada tampilan Street View</span></div>';
                         }
-                    } else {
-                        this.$refs.streetViewContainer.innerHTML = '<div class="w-full h-full flex flex-col items-center justify-center bg-surface-variant/50"><span class="material-symbols-outlined text-6xl text-on-surface-variant/30 mb-2">location_off</span><span class="text-on-surface-variant/50 font-body-md">Tidak ada tampilan Street View</span></div>';
+                    },
+                    closeModal() {
+                        this.isOpen = false;
+                        document.body.style.overflow = ''; 
+                        setTimeout(() => {
+                            this.$refs.streetViewContainer.innerHTML = '';
+                        }, 300);
                     }
-                },
-                closeModal() {
-                    this.isOpen = false;
-                    document.body.style.overflow = ''; 
-                    setTimeout(() => {
-                        this.$refs.streetViewContainer.innerHTML = '';
-                    }, 300);
-                }
-            }));
-        });
+                }));
+            }
+        }
 
-        document.addEventListener('livewire:init', () => {
+        if (window.Alpine) {
+            registerMapModal();
+        } else {
+            document.addEventListener('alpine:init', registerMapModal);
+        }
+
+        function initLeafletMap() {
+            const mapContainer = document.getElementById('map');
+            if (!mapContainer || typeof L === 'undefined') return;
+
+            if (leafletMap) {
+                leafletMap.remove();
+                leafletMap = null;
+            }
+            mapMarkers = [];
+
             leafletMap = L.map('map', { scrollWheelZoom: false }).setView([-6.8286, 107.9253], 14);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -175,7 +192,6 @@
                         latLngs.push([lat, lng]);
                         mapMarkers[index] = marker;
                         
-                        // Open full screen modal on marker click
                         marker.on('click', () => {
                             window.dispatchEvent(new CustomEvent('open-map-modal', { detail: point }));
                         });
@@ -190,14 +206,19 @@
             
             leafletMap.on('focus', function() { leafletMap.scrollWheelZoom.enable(); });
             leafletMap.on('blur', function() { leafletMap.scrollWheelZoom.disable(); });
-        });
+        }
+
+        document.addEventListener('livewire:navigated', initLeafletMap);
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLeafletMap);
+        } else {
+            initLeafletMap();
+        }
 
         function focusMarker(index) {
             if(mapMarkers[index] && leafletMap) {
                 const latLng = mapMarkers[index].getLatLng();
                 leafletMap.setView(latLng, 17, { animate: true, duration: 1 });
-                
-                // Directly dispatch modal open event
                 window.dispatchEvent(new CustomEvent('open-map-modal', { detail: globalMapPoints[index] }));
             }
         }

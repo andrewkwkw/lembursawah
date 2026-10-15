@@ -13,7 +13,7 @@
     RewriteRule (^|/)\.(?!well-known) - [F,L]
 
     # 3. Blokir akses langsung ke folder-folder internal Laravel (vendor PHP diblokir, aset publik .js/.css diizinkan)
-    RewriteRule (^|/)(app|bootstrap|config|database|resources|routes|storage/framework|storage/logs|tests)(/|$) - [F,L]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage/framework|storage/logs|tests)(/|$) - [F,L]
     RewriteRule (^|/)vendor/.*\.php$ - [F,L]
 
     # 4. Blokir akses ke file sensitif dan file proyek (composer, package, artisan, vite, dll)
@@ -52,7 +52,7 @@
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
-    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com; connect-src 'self' blob: https://*.tile.openstreetmap.org https://unpkg.com;"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://unpkg.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https:; frame-src 'self' https://www.google.com https://maps.google.com https://www.youtube.com; connect-src 'self' blob: https://*.tile.openstreetmap.org https://unpkg.com;"
     Header unset X-Powered-By
     Header always unset X-Powered-By
 </IfModule>
