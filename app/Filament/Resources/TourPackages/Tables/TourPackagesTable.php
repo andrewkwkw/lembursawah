@@ -39,9 +39,6 @@ class TourPackagesTable
                 \Filament\Tables\Columns\IconColumn::make('is_popular')
                     ->label('Populer')
                     ->boolean(),
-                TextColumn::make('wa_number')
-                    ->label('Nomor WA')
-                    ->searchable(),
                 TextColumn::make('deleted_at')
                     ->label('Dihapus Pada')
                     ->dateTime()

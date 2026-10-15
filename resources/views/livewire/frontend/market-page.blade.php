@@ -1,4 +1,11 @@
 <div class="min-h-screen bg-surface">
+    @php
+        $rawWa = \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890';
+        $cleanWa = preg_replace('/[^0-9]/', '', $rawWa);
+        if (str_starts_with($cleanWa, '0')) {
+            $cleanWa = '62' . substr($cleanWa, 1);
+        }
+    @endphp
     <div class="pt-24 pb-8 bg-surface"></div>
 
     <main class="max-w-[1280px] mx-auto px-4 md:px-8 pb-16">
@@ -66,8 +73,10 @@
                         </div>
                         @endif
                         <h2 class="font-display-md text-display-md font-bold mb-4">{{ $featuredProduct->name }}</h2>
-                        <div class="font-body-lg text-body-lg text-white/90 mb-8 line-clamp-2">{!! strip_tags($featuredProduct->description) !!}</div>
-                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $featuredProduct->wa_number) }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-label-lg font-semibold hover:bg-primary/90 transition-colors shadow-sm">
+                        @php
+                            $featuredMsg = urlencode("Halo admin Lembur Sawah, saya tertarik memesan produk unggulan: " . $featuredProduct->name . " seharga Rp " . number_format($featuredProduct->price, 0, ',', '.') . ".");
+                        @endphp
+                        <a href="https://wa.me/{{ $cleanWa }}?text={{ $featuredMsg }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-on-primary rounded-xl font-label-lg font-semibold hover:bg-primary/90 transition-colors shadow-sm">
                             Pesan Produk <span class="material-symbols-outlined">arrow_forward</span>
                         </a>
                     </div>
@@ -101,7 +110,10 @@
                                 <div class="font-body-sm text-body-sm text-on-surface-variant mb-6 line-clamp-2">{!! strip_tags($product->description) !!}</div>
                                 
                                 <div class="mt-auto">
-                                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $product->wa_number) }}" target="_blank" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-primary text-primary rounded-lg font-label-md font-semibold hover:bg-primary/5 transition-colors">
+                                    @php
+                                        $productMsg = urlencode("Halo admin Lembur Sawah, saya tertarik memesan produk: " . $product->name . " seharga Rp " . number_format($product->price, 0, ',', '.') . ".");
+                                    @endphp
+                                    <a href="https://wa.me/{{ $cleanWa }}?text={{ $productMsg }}" target="_blank" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 border border-primary text-primary rounded-lg font-label-md font-semibold hover:bg-primary/5 transition-colors">
                                         <span class="material-symbols-outlined text-[18px]">chat</span>
                                         Pesan via WhatsApp
                                     </a>

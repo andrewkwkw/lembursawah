@@ -43,9 +43,13 @@
                 
                 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-6 shadow-sm">
                     @php
-                        $waNumber = \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890';
+                        $rawWa = \App\Models\Setting::where('key', 'whatsapp_number')->value('value') ?? '6281234567890';
+                        $cleanWa = preg_replace('/[^0-9]/', '', $rawWa);
+                        if (str_starts_with($cleanWa, '0')) {
+                            $cleanWa = '62' . substr($cleanWa, 1);
+                        }
                         $waMessage = urlencode("Halo admin Lembur Sawah, saya tertarik membeli produk: " . $product->name . " seharga Rp " . number_format($product->price, 0, ',', '.') . ".");
-                        $waLink = "https://wa.me/{$waNumber}?text={$waMessage}";
+                        $waLink = "https://wa.me/{$cleanWa}?text={$waMessage}";
                     @endphp
 
                     <a href="{{ $waLink }}" target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-6 rounded-xl transition-colors shadow-sm">

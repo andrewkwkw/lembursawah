@@ -45,8 +45,6 @@ class ProductForm
                     ->placeholder('mis: Terlaris, Baru'),
                 \Filament\Forms\Components\Toggle::make('is_featured')
                     ->label('Produk Unggulan (Banner)'),
-                TextInput::make('wa_number')
-                    ->label('Nomor WhatsApp (Pembelian)'),
             ]);
     }
 }

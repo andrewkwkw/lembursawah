@@ -47,8 +47,6 @@ class TourPackageForm
                     ->label('Tandai Populer'),
                 TextInput::make('features')
                     ->label('Fitur (Pisahkan dengan koma)'),
-                TextInput::make('wa_number')
-                    ->label('Nomor WhatsApp (Booking)'),
             ]);
     }
 }

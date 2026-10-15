@@ -39,9 +39,6 @@ class ProductsTable
                 \Filament\Tables\Columns\IconColumn::make('is_featured')
                     ->label('Produk Unggulan')
                     ->boolean(),
-                TextColumn::make('wa_number')
-                    ->label('Nomor WA')
-                    ->searchable(),
                 TextColumn::make('deleted_at')
                     ->label('Dihapus Pada')
                     ->dateTime()

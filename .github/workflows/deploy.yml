@@ -17,34 +17,35 @@ jobs:
         with:
           php-version: '8.4'
           
+      # 1. Install Composer khusus PROD (tanpa PHPUnit / Dev tools perusak keamanan)
       - name: Install Composer Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
+        run: composer install --no-dev -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
         
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           
+      # 2. Compile asset CSS & JS (Vite)
       - name: Install NPM Dependencies & Build
         run: |
           npm ci
           npm run build
-          
-      - name: Create Deployment Zip
-        run: |
-          zip -r deploy.zip . -x "*.git*" "*node_modules*" "*.env*" "database/*.sqlite*" "tests/*" "storage/app/public/*" "storage/framework/cache/*" "storage/framework/sessions/*" "storage/framework/views/*" "storage/logs/*"
 
-      - name: Copy Zip to Server via SCP
-        uses: appleboy/scp-action@master
+      # 3. RSYNC: Hanya kirim file yang berubah (cepat, hemat bandwidth, tidak menimpa file sensitif)
+      - name: Sync Changed Files via Rsync
+        uses: easingthemes/ssh-deploy@v5.1.0
         with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SERVER_PORT }}
-          source: "deploy.zip"
-          target: ${{ secrets.SERVER_TARGET_PATH }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
+          REMOTE_PORT: ${{ secrets.SERVER_PORT }}
+          TARGET: ${{ secrets.SERVER_TARGET_PATH }}
+          ARGS: "-rlgoDzvc -i --delete"
+          EXCLUDE: "/.git/, /node_modules/, /.env*, /storage/app/public/, /storage/framework/, /storage/logs/, /database/*.sqlite*, /tests/"
 
-      - name: Unzip and run post-deployment commands
+      # 4. Finalisasi di Server (Perbaiki permission, sinkronisasi aset Livewire, refresh cache, & migrasi)
+      - name: Run post-deployment commands
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -53,10 +54,22 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             cd ${{ secrets.SERVER_TARGET_PATH }}
-            unzip -q -o deploy.zip
-            rm deploy.zip
+
+            # Pastikan struktur folder storage dan permission siap
+            mkdir -p storage/framework/{sessions,views,cache/data} storage/logs bootstrap/cache
+            chmod -R 775 storage bootstrap/cache
+
+            # Pastikan symlink storage terhubung
             php artisan storage:link
+
+            # Sinkronkan aset Livewire agar interaksi UI & form tidak bermasalah
+            php artisan vendor:publish --tag=livewire:assets --force
+
+            # Bersihkan cache lama lalu buat cache baru agar perubahan langsung aktif
+            php artisan optimize:clear
             php artisan optimize
             php artisan view:cache
             php artisan filament:optimize
+
+            # Jalankan migrasi database jika ada
             php artisan migrate --force
